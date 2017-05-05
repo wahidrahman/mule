@@ -31,21 +31,21 @@ public class XmlLibrariesVerificationTestCase extends AbstractMuleTestCase
     public void documentBuilder()
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        assertThat(factory, instanceOf(org.apache.xerces.jaxp.DocumentBuilderFactoryImpl.class));
+        assertThat(factory, instanceOf(com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl.class));
     }
 
     @Test
     public void saxParser()
     {
         SAXParserFactory factory = SAXParserFactory.newInstance();
-        assertThat(factory, instanceOf(org.apache.xerces.jaxp.SAXParserFactoryImpl.class));
+        assertThat(factory, instanceOf(com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl.class));
     }
     
     @Test
     public void xmlInput()
     {
         XMLInputFactory factory = XMLInputFactory.newInstance();
-        assertThat(factory, instanceOf(com.ctc.wstx.stax.WstxInputFactory.class));
+        assertThat(factory, instanceOf(com.sun.xml.internal.stream.XMLInputFactoryImpl.class));
     }
     
     /**
@@ -57,13 +57,13 @@ public class XmlLibrariesVerificationTestCase extends AbstractMuleTestCase
     public void transformer()
     {
         TransformerFactory factory = TransformerFactory.newInstance();
-        assertThat(factory, instanceOf(org.apache.xalan.processor.TransformerFactoryImpl.class));
+        assertThat(factory, instanceOf(com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl.class));
     }
 
     @Test
     public void schema()
     {
         SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-        assertThat(factory, instanceOf(org.apache.xerces.jaxp.validation.XMLSchemaFactory.class));
+        assertThat(factory, instanceOf(com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory.class));
     }
 }
