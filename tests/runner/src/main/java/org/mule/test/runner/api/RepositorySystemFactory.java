@@ -7,7 +7,6 @@
 
 package org.mule.test.runner.api;
 
-import static java.util.Collections.emptyList;
 import static org.apache.maven.repository.internal.MavenRepositorySystemUtils.newSession;
 import static org.eclipse.aether.repository.RepositoryPolicy.CHECKSUM_POLICY_IGNORE;
 import static org.eclipse.aether.repository.RepositoryPolicy.UPDATE_POLICY_NEVER;
@@ -59,32 +58,14 @@ public class RepositorySystemFactory {
    * @param classPath {@link URL}'s from class path
    * @param workspaceLocationResolver {@link WorkspaceLocationResolver} to resolve artifactId's {@link Path}s from workspace. Not
    *        {@code null}.
-   */
-  public static DependencyResolver newOfflineDependencyResolver(List<URL> classPath,
-                                                                WorkspaceLocationResolver workspaceLocationResolver,
-                                                                File mavenLocalRepositoryLocation) {
-    DefaultRepositorySystemSession session = newDefaultRepositorySystemSession();
-    session.setOffline(true);
-    session.setIgnoreArtifactDescriptorRepositories(true);
-    RepositorySystem system = newRepositorySystem(classPath, workspaceLocationResolver, mavenLocalRepositoryLocation, session);
-    return new DependencyResolver(system, session, emptyList());
-  }
-
-  /**
-   * Creates an instance of the {@link RepositorySystemFactory} to collect Maven dependencies.
-   *
-   * @param classPath {@link URL}'s from class path
-   * @param workspaceLocationResolver {@link WorkspaceLocationResolver} to resolve artifactId's {@link Path}s from workspace. Not
-   *        {@code null}.
    * @param mavenLocalRepositoryLocation file system location for the local Maven repository to resolve offline dependencies.
    * @param remoteRepositories list of {@link String} with URL of remote repositories to resolve online dependencies not present in local Maven repository.
    */
-  public static DependencyResolver newOnlineDependencyResolver(List<URL> classPath,
-                                                               WorkspaceLocationResolver workspaceLocationResolver,
-                                                               File mavenLocalRepositoryLocation,
-                                                               List<String> remoteRepositories) {
+  public static DependencyResolver newDependencyResolver(List<URL> classPath,
+                                                         WorkspaceLocationResolver workspaceLocationResolver,
+                                                         File mavenLocalRepositoryLocation,
+                                                         List<String> remoteRepositories) {
     DefaultRepositorySystemSession session = newDefaultRepositorySystemSession();
-    session.setIgnoreArtifactDescriptorRepositories(true);
     RepositorySystem system = newRepositorySystem(classPath, workspaceLocationResolver, mavenLocalRepositoryLocation, session);
     return new DependencyResolver(system, session, collectRemoteRepositories(remoteRepositories));
   }
