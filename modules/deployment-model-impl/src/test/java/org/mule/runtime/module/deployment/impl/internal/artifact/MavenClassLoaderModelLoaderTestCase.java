@@ -19,6 +19,7 @@ import static org.junit.Assert.fail;
 import static org.junit.rules.ExpectedException.none;
 import static org.mule.runtime.core.config.bootstrap.ArtifactType.APP;
 import static org.mule.tck.MuleTestUtils.testWithSystemProperties;
+import static org.mule.tck.MuleTestUtils.testWithSystemProperty;
 import org.mule.runtime.globalconfig.api.GlobalConfigLoader;
 import org.mule.tck.junit4.rule.SystemProperty;
 
@@ -37,12 +38,14 @@ import org.junit.rules.ExpectedException;
 public class MavenClassLoaderModelLoaderTestCase {
 
   public static final String MULE_RUNTIME_CONFIG_MAVEN_REPOSITORY_LOCATION = "muleRuntimeConfig.maven.repositoryLocation";
+
   private MavenClassLoaderModelLoader mavenClassLoaderModelLoader;
 
   private File artifactFile = getApplicationFolder("apps/single-dependency");
 
   @Rule
   public SystemProperty repositoryLocation = new SystemProperty(MULE_RUNTIME_CONFIG_MAVEN_REPOSITORY_LOCATION,
+
                                                                 createTempDir().getAbsolutePath());
 
   @Rule
